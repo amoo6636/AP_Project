@@ -3,7 +3,7 @@
     <section class="hero is-medium is-dark mb-6">
         <div class="hero-body has-text-centered">
             <p class="title mb-6">
-                Welcome to Cafeteriack
+                Welcome to Cafe Teriack
             </p>
             <p class="subtitle">
                 Coffee is our love language
@@ -21,9 +21,9 @@
         v-for="product in latestProducts"
         v-bind:key="product.id"
       >
-        <div>
+        <div class="box">
           <figure class="image mb-4">
-            <img src="product.get_thumbnail">
+            <img :src="product.get_thumbnail">
           </figure>
 
           <h3 class="is-size-4">{{ product.name }}</h3>
