@@ -26,12 +26,12 @@ class Product(models.Model):
 
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField()
-    sugar = models.IntegerField(max_length=10)
-    coffee = models.IntegerField(max_length=10)
-    flour = models.IntegerField(max_length=10)
-    chocolate = models.IntegerField(max_length=10)
+    sugar = models.IntegerField()
+    coffee = models.IntegerField()
+    flour = models.IntegerField()
+    chocolate = models.IntegerField()
     description = models.TextField(blank=True, null=True)
-    price = models.IntegerField(max_length=10)
+    price = models.IntegerField()
     image = models.ImageField(upload_to='uploads/', blank=True, null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
 
