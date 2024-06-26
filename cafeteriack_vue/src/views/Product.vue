@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="control">
-                        <a class="button is-dark">Add to cart</a>
+                        <a class="button is-dark" @click="addtoCart">Add to cart</a>
                     </div>
 
                 </div>
@@ -60,7 +60,21 @@ export default {
                 .catch(error =>{
                     console.log(error);
                 })
+        },
+        addtoCart(){
+            if (isNaN(this.quantity) || this.quantity < 1){
+            this.quantity = 1
+            }
+            const item = {
+                product: this.product,
+                quantity: this.quantity
+            }
+
+            this.$store.commit('addToCart', item)
+
         }
+        
+
     }
 
 
