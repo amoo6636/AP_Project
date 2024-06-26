@@ -3,7 +3,7 @@
     <section class="hero is-medium is-dark mb-6">
         <div class="hero-body has-text-centered">
             <p class="title mb-6">
-                Welcome to Cafeteriack
+                Welcome to Cafe Teriack
             </p>
             <p class="subtitle">
                 Coffee is our love language
@@ -21,15 +21,15 @@
         v-for="product in latestProducts"
         v-bind:key="product.id"
       >
-        <div>
+        <div class="box">
           <figure class="image mb-4">
-            <img src="product.get_thumbnail">
+            <img :src="product.get_thumbnail">
           </figure>
 
           <h3 class="is-size-4">{{ product.name }}</h3>
           <p class="is-size-6 has-text-grey">${{ product.price }}</p>
 
-          View details
+          <router-link v-bind:to="product.get_absolute_url" class="button is-dark mt-4">View Details</router-link>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@ export default {
   mounted() {
     this.getLatestProducts()
 
-    document.title = 'Home | Cafeteriack'
+    document.title = 'Home | Cafe Teriack'
   },
   methods: {
     getLatestProducts() {

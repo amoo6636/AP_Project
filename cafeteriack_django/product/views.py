@@ -14,3 +14,15 @@ class LatestProductsList(APIView):
         products = Product.objects.all()[0:4]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
+
+class ProductDetail(APIView):
+    def get_object(self, vertical_slug, product_slug):
+        try:    
+            return Product.objects.get(vertical__slug=vertical_slug , slug=product_slug)
+        except Product.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, vertical_slug, product_slug, format=None):
+        product = self.get_object(vertical_slug,product_slug)
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
