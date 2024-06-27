@@ -23,7 +23,6 @@ class Vertical(models.Model):
 
 class Product(models.Model):
     vertical = models.ForeignKey(Vertical, related_name='products', on_delete=models.CASCADE)
-
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField()
     sugar = models.IntegerField()

@@ -38,3 +38,14 @@ class VerticalDetail(APIView):
         vertical = self.get_object(vertical_slug)
         serializer = VerticalSerializer(vertical)
         return Response(serializer.data)
+    
+@api_view(['POST'])
+def search(request):
+    query = request.data.get('query','')
+
+    if query:
+        products = Product.objects.filter(Q(name__icontains=query)| Q(description__icontains=query))
+        seriliazer = ProductSerializer(products, many=True)
+        return Response(seriliazer.data)
+    else:
+        return Response({"products":[]})

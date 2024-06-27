@@ -5,6 +5,8 @@ import Product from '../views/Product.vue'
 import SignUp from '../views/SignUp.vue'
 import Cart from '../views/CartView.vue'
 import Vertical from '../views/Vertical.vue'
+import LogIn from '../views/LogIn.vue'
+import Search from '../views/Search.vue'
 
 const routes = [
   {
@@ -21,9 +23,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    path: '/search',
+    name: 'Search',
+    component: Search
+  },
+  {
     path: '/sign-up',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/log-in',
+    name: 'LogIn',
+    component: LogIn
   },
 
   {
@@ -49,3 +61,8 @@ const router = createRouter({
 })
 
 export default router
+
+
+
+
+
