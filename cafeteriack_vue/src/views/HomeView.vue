@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="hero is-medium is-dark mb-6">
+    <section class="hero is-small is-dark mb-6">
         <div class="hero-body has-text-centered">
             <p class="title mb-6">
                 Welcome to Cafe Teriack
@@ -10,6 +10,8 @@
             </p>
         </div>
     </section>
+    <carousel :slides="slides" :interval="3000" controls indicators></carousel>
+
 
     <div class="columns is-multiline">
       <div class="column is-12">
@@ -38,16 +40,24 @@
 
 <script>
 import axios from 'axios'
+import Carousel from "../components/carousel/Carousel.vue";
+
 
 export default {
   name: 'Home',
   data() {
     return {
-      latestProducts: []
-    }
+      latestProducts: [],
+      slides: [
+        "https://wallpapercave.com/wp/wp9277620.jpg",
+        "https://wallpapercave.com/wp/wp9277504.jpg",
+        "https://wallpapercave.com/wp/wp4430573.jpg",
+        "https://wallpapercave.com/wp/wp9278380.jpg",
+        "https://wallpapercave.com/wp/wp9278197.jpg",
+        ]
+      }
   },
-  components: {
-  },
+  components: { Carousel },
   mounted() {
     this.getLatestProducts()
 
