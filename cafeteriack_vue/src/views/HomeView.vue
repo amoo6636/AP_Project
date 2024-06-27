@@ -2,7 +2,7 @@
   <div class="home">
     <section class="hero is-small is-dark mb-6">
         <div class="hero-body has-text-centered">
-            <p class="title mb-6">
+            <p class="title mb-5">
                 Welcome to Cafe Teriack
             </p>
             <p class="subtitle">
@@ -82,9 +82,20 @@ export default {
 </script>
 
 <style scoped>
+  .box {
+    margin-top: 20px;
+  }
   .image {
     margin-top: -1.25rem;
     margin-left: -1.25rem;
     margin-right: -1.25rem;
   }
+  .title{
+    font-size: 50px
+  }
+  .subtitle{
+    font-size: 25px;
+    color: #63ba87;
+  }
+
 </style>
