@@ -6,12 +6,29 @@
             
                 <form @submit.prevent="submitForm">
                     <div class="field">
+                        <label>name</label>
+                        <div class="control">
+                            <input type="text" class="input" v-model="name">
+                        </div>
+                    </div>
+                    <div class="field">
                         <label>Username</label>
                         <div class="control">
                             <input type="text" class="input" v-model="username">
                         </div>
                     </div>
-
+                    <div class="field">
+                        <label>email</label>
+                        <div class="control">
+                            <input type="text" class="input" v-model="email">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Phone Number</label>
+                        <div class="control">
+                            <input type="tel" class="input" v-model="phoneNumber">
+                        </div>
+                    </div>
                     <div class="field">
                         <label>Password</label>
                         <div class="control">
