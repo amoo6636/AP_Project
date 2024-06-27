@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 
 import Product from '../views/Product.vue'
 import SignUp from '../views/SignUp.vue'
+import Cart from '../views/CartView.vue'
+
 const routes = [
   {
     path: '/',
@@ -18,16 +20,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/:vertical_slug/:product_slug/',
-    name: 'Product',
-    component: Product
-  },
-  {
     path: '/sign-up',
     name: 'SignUp',
     component: SignUp
   },
-  
+
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
+  },
   {
     path: '/:vertical_slug/:product_slug/',
     name: 'Product',
