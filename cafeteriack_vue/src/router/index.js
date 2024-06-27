@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import Product from '../views/Product.vue'
 import SignUp from '../views/SignUp.vue'
 import Cart from '../views/CartView.vue'
+import Vertical from '../views/Vertical.vue'
 
 const routes = [
   {
@@ -31,9 +32,14 @@ const routes = [
     component: Cart
   },
   {
-    path: '/:vertical_slug/:product_slug/',
+    path: '/:vertical_slug/:product_slug',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/:vertical_slug',
+    name: 'Vertical',
+    component: Vertical
   }
 ]
 
