@@ -20,20 +20,21 @@
 
       <div
         class="column is-3"
-        v-for="product in latestProducts"
-        v-bind:key="product.id"
-      >
-        <div class="box">
-          <figure class="image mb-4">
-            <img :src="product.get_thumbnail">
-          </figure>
+          v-for="product in latestProducts"
+          v-bind:key="product.id"
+        >
+            <div class="box">
+            <figure class="image mb-4">
+                <img :src="product.get_thumbnail">
+            </figure>
 
-          <h3 class="is-size-4">{{ product.name }}</h3>
-          <p class="is-size-6 has-text-grey">${{ product.price }}</p>
+            <h3 class="is-size-4">{{ product.name }}</h3>
+            <p class="is-size-6 has-text-grey">${{ product.price }}</p>
 
-          <router-link v-bind:to="product.get_absolute_url" class="button is-dark mt-4">View Details</router-link>
+            <router-link v-bind:to="product.get_absolute_url" class="button is-dark mt-4">View Details</router-link>
+            </div>
         </div>
-      </div>
+
     </div>
   </div>
 </template>
@@ -57,7 +58,9 @@ export default {
         ]
       }
   },
-  components: { Carousel },
+  components: {
+       Carousel
+       },
   mounted() {
     this.getLatestProducts()
 
@@ -82,13 +85,13 @@ export default {
 </script>
 
 <style scoped>
-  .box {
-    margin-top: 20px;
-  }
-  .image {
+.image {
     margin-top: -1.25rem;
     margin-left: -1.25rem;
     margin-right: -1.25rem;
+  }
+  .box {
+    margin-top: 20px;
   }
   .title{
     font-size: 50px

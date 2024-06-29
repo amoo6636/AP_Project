@@ -26,3 +26,26 @@ class ProductDetail(APIView):
         product = self.get_object(vertical_slug, product_slug)
         serializer = ProductSerializer(product)
         return Response(serializer.data)
+    
+class VerticalDetail(APIView):
+    def get_object(self, vertical_slug):
+        try:    
+            return Vertical.objects.get(slug=vertical_slug)
+        except Vertical.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, vertical_slug, format=None):
+        vertical = self.get_object(vertical_slug)
+        serializer = VerticalSerializer(vertical)
+        return Response(serializer.data)
+    
+@api_view(['POST'])
+def search(request):
+    query = request.data.get('query','')
+
+    if query:
+        products = Product.objects.filter(Q(name__icontains=query)| Q(description__icontains=query))
+        seriliazer = ProductSerializer(products, many=True)
+        return Response(seriliazer.data)
+    else:
+        return Response({"products":[]})
