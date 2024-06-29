@@ -6,9 +6,9 @@
 
                 <form @submit.prevent="submitForm">
                     <div class="field">
-                        <label>Username or Email</label>
+                        <label>Username</label>
                         <div class="control">
-                            <input type="text" class="input" v-model="identifier">
+                            <input type="text" class="input" v-model="username">
                         </div>
                     </div>
 
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="notification is-danger" v-if="errors.length">
-                        <p v-for="error in errors" :key="error">{{ error }}</p>
+                        <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
                     </div>
 
                     <div class="field">
@@ -45,7 +45,7 @@ export default {
     name: 'LogIn',
     data() {
         return {
-            identifier: '', // New data property for username or email
+            username: '',
             password: '',
             errors: []
         }
@@ -55,37 +55,41 @@ export default {
     },
     methods: {
         async submitForm() {
-            this.errors = [];
-            axios.defaults.headers.common["Authorization"] = "";
-            localStorage.removeItem("token");
+            axios.defaults.headers.common["Authorization"] = ""
+
+            localStorage.removeItem("token")
 
             const formData = {
-                identifier: this.identifier, // Use identifier instead of username
+                username: this.username,
                 password: this.password
-            };
+            }
 
             await axios
                 .post("/api/v1/token/login/", formData)
                 .then(response => {
-                    const token = response.data.auth_token;
+                    const token = response.data.auth_token
 
-                    this.$store.commit('setToken', token);
-                    axios.defaults.headers.common["Authorization"] = "Token " + token;
-                    localStorage.setItem("token", token);
+                    this.$store.commit('setToken', token)
+                    
+                    axios.defaults.headers.common["Authorization"] = "Token " + token
 
-                    const toPath = this.$route.query.to || '/cart';
-                    this.$router.push(toPath);
+                    localStorage.setItem("token", token)
+
+                    const toPath = this.$route.query.to || '/cart'
+
+                    this.$router.push(toPath)
                 })
                 .catch(error => {
                     if (error.response) {
                         for (const property in error.response.data) {
-                            this.errors.push(`${property}: ${error.response.data[property]}`);
+                            this.errors.push(`${property}: ${error.response.data[property]}`)
                         }
                     } else {
-                        this.errors.push('Something went wrong. Please try again');
-                        console.log(JSON.stringify(error));
+                        this.errors.push('Something went wrong. Please try again')
+                        
+                        console.log(JSON.stringify(error))
                     }
-                });
+                })
         }
     }
 }
