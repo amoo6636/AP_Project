@@ -28,3 +28,8 @@ class VerticalSerializer(serializers.ModelSerializer):
             "get_absolute_url",
             "products",
         )
+
+class AddProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'

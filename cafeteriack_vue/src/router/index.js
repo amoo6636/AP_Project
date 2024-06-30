@@ -7,6 +7,7 @@ import Cart from '../views/CartView.vue'
 import Vertical from '../views/Vertical.vue'
 import LogIn from '../views/LogIn.vue'
 import Search from '../views/Search.vue'
+import AddProduct from '../views/AddProduct.vue'
 
 const routes = [
   {
@@ -52,7 +53,15 @@ const routes = [
     path: '/:vertical_slug',
     name: 'Vertical',
     component: Vertical
-  }
+  },
+  {
+    path: '/dashbord/add-product',
+    name: 'AddProduct',
+    component: AddProduct,
+    meta: {
+      requireLogin: true
+    }
+  },
 ]
 
 const router = createRouter({
