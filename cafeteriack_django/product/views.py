@@ -60,7 +60,6 @@ def search(request):
 @authentication_classes([authentication.TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
 def addProduct(request):
-    print(request.user)
     if request.user.is_staff:
         serializer = AddProductSerializer(data=request.data)
         if serializer.is_valid():
@@ -73,4 +72,4 @@ def addProduct(request):
         print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
     else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
