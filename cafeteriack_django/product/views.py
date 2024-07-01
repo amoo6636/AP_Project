@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.http import Http404 , HttpResponse
 
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -28,37 +28,7 @@ class ProductDetail(APIView):
         serializer = ProductSerializer(product)
         return Response(serializer.data)
     
-class AddProduct(APIView):
-    
-    def post(self, request):
 
-        serializer = AddProductSerializer(
-                data= {
-                "name": request.data.get("name"),
-                "slug": request.data.get("slug"),
-                "vertical": request.data.get("vertical"),
-                "sugar": request.data.get("sugar"),
-                "coffee": request.data.get("coffee"),
-                "flour": request.data.get("flour"),
-                "chocolate": request.data.get("chocolate"),
-                "description": request.data.get("description"),
-                "price":request.data.get("price"),
-                "image":request.FILES.get("image"),
-            },
-            context = {"request":request},
-        )
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-            # except Exception:
-            #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    
-    # def perform_create(self, serializer):
-    #     serializer.save()
     
 class VerticalDetail(APIView):
     def get_object(self, vertical_slug):
@@ -83,15 +53,17 @@ def search(request):
     else:
         return Response({"products":[]})
     
-# @api_view(['POST'])
-# def addProduct(request):
-#     serializer = AddProductSerializer(data=request.data)
-#     if serializer.is_valid():
-#         try :
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         except Exception:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['POST'])
+def addProduct(request):
+    print(request.data.get('image'))
+    serializer = AddProductSerializer(data=request.data)
+    if serializer.is_valid():
+        try :
+            serializer.save(thumbnail=None)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    print(serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
     

@@ -10,7 +10,7 @@
                     <label>Name</label>
 
                     <div class="control">
-                        <input type="text" name="name" class="input" v-model="product.name">
+                        <input type="text" name="name" class="input" v-model="name">
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
                     <label>Slug</label>
 
                     <div class="control">
-                        <input type="text" name="slug" class="input" v-model="product.slug">
+                        <input type="text" name="slug" class="input" v-model="slug">
                     </div>
                 </div>
 
@@ -26,7 +26,7 @@
                     <label>Price</label>
 
                     <div class="control">
-                        <input type="number" name="price" class="input" v-model="product.price">
+                        <input type="number" name="price" class="input" v-model="price">
                     </div>
                 </div>
 
@@ -34,12 +34,12 @@
                     <label>Vertical</label>
                     
                     <div class="control">
-                        <select name="Vertical" v-model="product.vertical">
+                        <select name="Vertical" v-model="vertical">
                             <option disabled value="">Please select one</option>
-                            <option value="hotdrinks">Hot Drinks</option>
-                            <option value="icedrinks">Ice Drinks</option>
-                            <option value="desserts">Desserts</option>
-                            <option value="cakes">Cakes</option>
+                            <option value="1">Hot Drinks</option>
+                            <option value="2">Ice Drinks</option>
+                            <option value="3">Desserts</option>
+                            <option value="4">Cakes</option>
                         </select>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <label>Sugar</label>
 
                     <div class="control">
-                        <input type="number" name="sugar" class="input" v-model="product.sugar">
+                        <input type="number" name="sugar" class="input" v-model="sugar">
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@
                     <label>Coffee</label>
 
                     <div class="control">
-                        <input type="number" name="coffee" class="input" v-model="product.coffee">
+                        <input type="number" name="coffee" class="input" v-model="coffee">
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                     <label>Flour</label>
 
                     <div class="control">
-                        <input type="number" name="flour" class="input" v-model="product.flour">
+                        <input type="number" name="flour" class="input" v-model="flour">
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
                     <label>Chocolate</label>
 
                     <div class="control">
-                        <input type="number" name="chocolate" class="input" v-model="product.chocolate">
+                        <input type="number" name="chocolate" class="input" v-model="chocolate">
                     </div>
                 </div>
 
@@ -88,16 +88,19 @@
                     <label>Description</label>
 
                     <div class="control">
-                        <input type="text" name="description" class="input" v-model="product.description">
+                        <input type="text" name="description" class="input" v-model="description">
                     </div>
                 </div>
 
-                <div class="field">
-                    <label>Image</label>
+                <div class="file">
+                    <label class="file-label">Image
 
-                    <div class="control">
-                        <input type="file" id="file" ref="myImage" class="custom-file-input" @change="previewFiles">
-                    </div>
+                        <input type="file" ref="file" class="file-input" @change="selectFile">
+                        <span class="file-cta">
+                            <span class="file-labe">Choose an image...</span>
+                        </span>
+        
+                    </label>
                 </div>
 
                 <div class="field">
@@ -119,20 +122,41 @@ export default {
     name: 'AddProduct',
     data() {
         return {
-            product: {}
+            name: '',
+            slug: '',
+            price:'',
+            vertical: '',
+            sugar: '',
+            coffee: '',
+            flour: '',
+            chocolate: '',
+            description: '',
+            image: null
          }
     },
     mounted() {
         document.title = 'Add Product | Cafe Teriack'
     },
     methods: {
-        previewFiles() {
-            this.product.image = this.$refs.myImage.files
+        selectFile(){
+            this.image = this.$refs.file.files.item(0)
         },
-        submitFrom() {
-            console.log(this.product)
+        submitFrom(){
+
+            let formData = new FormData();
+            formData.append('name',this.name);
+            formData.append('slug', this.slug);
+            formData.append('price',this.price);
+            formData.append('vertical',this.vertical);
+            formData.append('sugar', this.sugar);
+            formData.append('coffee', this.coffee);
+            formData.append('flour', this.flour);
+            formData.append('chocolate', this.chocolate);
+            formData.append('description', this.description);
+            formData.append('image', this.image);
+
             axios
-                .post('/api/v1/add/',this.product)
+                .post('/api/v1/add/', formData)
                 .then(response =>{
                     this.$router.push('/')
                 })

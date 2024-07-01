@@ -32,4 +32,19 @@ class VerticalSerializer(serializers.ModelSerializer):
 class AddProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
+        read_only_fields = (
+            "thumbnail",
+
+        )
+        fields = (
+            "name",
+            "slug",
+            "vertical",
+            "sugar",
+            "coffee",
+            "flour",
+            "chocolate",
+            "description",
+            "price",
+            "image",
+        )
