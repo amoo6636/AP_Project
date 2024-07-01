@@ -37,8 +37,10 @@
                 <input v-model="checked" type="checkbox" name="check"/>
                 <label for="check">{{checked}} Serve outside</label>
                 <hr>
-
-                <router-link to="/cart/checkout" class="button is-dark">Payment</router-link>
+                <template v-if="cartTotalLength">
+                    <button class="button is-dark" @click="submitForm">Pay</button>
+                </template>
+                
             </div>
         </div>
     </div>
@@ -67,6 +69,36 @@ export default {
     methods: {
         removeFromCart(item) {
             this.cart.items = this.cart.items.filter(i => i.product.id !== item.product.id)
+        },
+        submitForm(){
+            const items = []
+            for (let i = 0; i < this.cart.items.length; i++) {
+                const item = this.cart.items[i]
+                const obj = {
+                    product: item.product.id,
+                    quantity: item.quantity,
+                    price: item.product.price * item.quantity
+                }
+
+                items.push(obj)
+            }
+            const data = {
+                'items': items,
+            }
+        axios
+            .post('/api/v1/checkout/', data)
+            .then(response => {
+                this.cart.items = []
+                console.log(response)
+                // You can clear the cart here if you want
+                this.$router.push('/my-account')
+                
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+ 
         }
     },
     computed: {
