@@ -15,12 +15,12 @@
 
     <div class="columns is-multiline">
       <div class="column is-12">
-          <h2 class="is-size-2 has-text-centered">Latest products</h2>
+          <h2 class="is-size-2 has-text-centered">Popular Products</h2>
       </div>
 
       <div
         class="column is-3"
-          v-for="product in latestProducts"
+          v-for="product in popularProducts"
           v-bind:key="product.id"
         >
             <div class="box">
@@ -48,7 +48,7 @@ export default {
   name: 'Home',
   data() {
     return {
-      latestProducts: [],
+      popularProducts: [],
       slides: [
         "https://wallpapercave.com/wp/wp9277620.jpg",
         "https://wallpapercave.com/wp/wp9277504.jpg",
@@ -62,17 +62,17 @@ export default {
        Carousel
        },
   mounted() {
-    this.getLatestProducts()
+    this.getPopularProducts()
 
     document.title = 'Home | Cafe Teriack'
   },
   methods: {
-    async getLatestProducts() {
+    async getPopularProducts() {
       this.$store.commit('setIsLoading', true)
       await axios
-        .get('/api/v1/latest-products/')
+        .get('/api/v1/popular-products/')
         .then(response => {
-          this.latestProducts = response.data
+          this.popularProducts = response.data
         })
         .catch(error => {
           console.log(error)
