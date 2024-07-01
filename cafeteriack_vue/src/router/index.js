@@ -10,6 +10,7 @@ import LogIn from '../views/LogIn.vue'
 import Search from '../views/Search.vue'
 import AddProduct from '../views/AddProduct.vue'
 import MyAccount from '../views/MyAccount.vue'
+import Dashbord from '../views/Dashbord.vue'
 
 const routes = [
   {
@@ -68,6 +69,14 @@ const routes = [
     path: '/dashbord/add-product',
     name: 'AddProduct',
     component: AddProduct,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashbord',
+    name: 'Dashbord',
+    component: Dashbord,
     meta: {
       requireLogin: true
     }

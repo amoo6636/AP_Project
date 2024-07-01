@@ -34,7 +34,6 @@ class AddProductSerializer(serializers.ModelSerializer):
         model = Product
         read_only_fields = (
             "thumbnail",
-
         )
         fields = (
             "name",

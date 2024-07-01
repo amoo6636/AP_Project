@@ -158,7 +158,7 @@ export default {
             axios
                 .post('/api/v1/add/', formData)
                 .then(response =>{
-                    this.$router.push('/')
+                    this.$router.push('/756/dashbord')
                 })
                 .catch(error =>{
                     console.log(JSON.stringify(error))
