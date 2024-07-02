@@ -1,37 +1,47 @@
 <template>
     <div class="page-log-in">
-        <div class="columns">
-            <div class="column is-4 is-offset-4">
+        <div class="columns is-centered">
+            <div class="column is-4">
                 <h1 class="title">Log in</h1>
 
                 <form @submit.prevent="submitForm">
                     <div class="field">
-                        <label>Username</label>
-                        <div class="control">
+                        <label class="label">Username</label>
+                        <div class="control has-icons-left">
                             <input type="text" class="input" v-model="username">
+                            <span class="icon is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
                         </div>
                     </div>
 
                     <div class="field">
-                        <label>Password</label>
-                        <div class="control">
+                        <label class="label">Password</label>
+                        <div class="control has-icons-left">
                             <input type="password" class="input" v-model="password">
+                            <span class="icon is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
                         </div>
                     </div>
 
                     <div class="notification is-danger" v-if="errors.length">
-                        <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+                        <p v-for="error in errors" :key="error">{{ error }}</p>
                     </div>
 
                     <div class="field">
                         <div class="control">
-                            <button class="button is-dark">Log in</button>
+                            <button class="button custom-button is-fullwidth">Log in</button>
                         </div>
                     </div>
 
                     <hr>
 
-                    Or <router-link to="/sign-up">click here</router-link> to sign up!
+                    <div class="has-text-centered">
+                        Or
+                        <router-link to="/sign-up" class="custom-link">click here</router-link>
+                        to sign up!
+                    </div>
                 </form>
             </div>
         </div>
@@ -70,7 +80,7 @@ export default {
                     const token = response.data.auth_token
 
                     this.$store.commit('setToken', token)
-                    
+
                     axios.defaults.headers.common["Authorization"] = "Token " + token
 
                     localStorage.setItem("token", token)
@@ -86,7 +96,7 @@ export default {
                         }
                     } else {
                         this.errors.push('Something went wrong. Please try again')
-                        
+
                         console.log(JSON.stringify(error))
                     }
                 })
@@ -101,23 +111,22 @@ export default {
 }
 
 .title {
-    color: #E1C16E;
+    color: #CC7722;
     font-size: 2.5rem;
     text-align: center;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
 .field {
-    color: #D27D2D;
+    color: #E1C16E;
+    font-weight: bold;
     margin-bottom: 20px;
-}
-
-.control {
-    position: relative;
 }
 
 .label {
     font-weight: bold;
+    color: #E1C16E;
 }
 
 .input {
@@ -125,21 +134,19 @@ export default {
 }
 
 .icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 10px;
     color: #7a7a7a;
 }
 
-.button {
+.custom-button {
     margin-top: 10px;
+    background-color: #CC7722;
+    border-color: #CC7722;
+    color: white;
 }
 
 .notification {
     margin-bottom: 20px;
     background-color: #E1C16E;
-
 }
 
 hr {
@@ -152,9 +159,8 @@ hr {
     color: #7a7a7a;
 }
 
-.router-link {
-    color: #3273dc;
-    cursor: pointer;
+.custom-link {
+    color: #CC7722;
+    text-decoration: underline;
 }
-
 </style>
