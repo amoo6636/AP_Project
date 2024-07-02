@@ -36,7 +36,7 @@
           <router-link to="/hotdrinks" class="navbar-item">HOT DRINKS</router-link>
           <router-link to="/icedrinks" class="navbar-item">ICE DRINKS</router-link>
           <router-link to="/desserts" class="navbar-item">DESSERTS</router-link>
-          <router-link to="/cakes" class="navbar-item">Cakes</router-link>
+          <router-link to="/cakes" class="navbar-item">CAKES</router-link>
 
           <div class="navbar-item">
             <div class="buttons">

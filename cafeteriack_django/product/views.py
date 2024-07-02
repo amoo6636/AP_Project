@@ -72,3 +72,4 @@ def addProduct(request):
         return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
+

@@ -40,7 +40,9 @@ export default {
     data(){
         return {
             product : {},
-            quantity: 1
+            quantity: 1,
+            storages: {}
+            
         }
     },
     mounted() {
@@ -66,31 +68,70 @@ export default {
 
             this.$store.commit('setIsLoading', false)
         },
+        storagehandler(item){
+            const sugar_store = this.storages[0]['amount']-this.quantity*this.product.sugar
+            const coffee_store = this.storages[1]['amount']-this.quantity*this.product.coffee
+            const flour_store = this.storages[2]['amount']-this.quantity*this.product.flour
+            const chocolate_store = this.storages[3]['amount']-this.quantity*this.product.chocolate
+
+            if (sugar_store >= 0 && coffee_store>= 0 && flour_store >= 0 && chocolate_store >= 0){
+                
+                axios
+                .post('/api/v1/update-storage/',  {
+                                            "sugar_amount": sugar_store,
+                                            "coffee_amount": coffee_store,
+                                            "flour_amount": flour_store,
+                                            "chocolate_amount": chocolate_store
+                                            })
+                .then(response =>{
+                    this.$store.commit('addToCart', item)
+                    toast({
+                        message: 'Sweet hot tastes added to your card! make ready',
+                        type: 'is-success',
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 2500,
+                        position: 'bottom-right',
+                    })
+                }) 
+                .catch(error =>{
+                    console.log(error);
+                })
+            } else {
+                toast({
+                message: 'Sory we do not have raw materials',
+                type: 'is-danger',
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 2500,
+                position: 'bottom-right',
+                }) 
+            }
+
+        },
         addtoCart(){
             if (isNaN(this.quantity) || this.quantity < 1){
             this.quantity = 1
             }
             const item = {
                 product: this.product,
-                quantity: this.quantity
+                quantity: this.quantity,
             }
-
-            this.$store.commit('addToCart', item)
-
-            toast({
-                message: 'Sweet hot tastes added to your card! make ready',
-                type: 'is-success',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2500,
-                position: 'bottom-right',
-            })
+            
+            axios
+                .get('/api/v1/storage')
+                .then(response =>{
+                    this.storages = response.data
+                    this.storagehandler(item)
+                })
+                .catch(error =>{
+                    console.log(error);
+                })
+            
 
         }
-        
-
+    
     }
-
 
 }
 </script>
