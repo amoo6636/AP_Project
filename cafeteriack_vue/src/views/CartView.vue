@@ -88,6 +88,7 @@ export default {
         axios
             .post('/api/v1/checkout/', data)
             .then(response => {
+                this.$store.commit('clearCart')
                 this.cart.items = []
                 console.log(response)
                 // You can clear the cart here if you want
