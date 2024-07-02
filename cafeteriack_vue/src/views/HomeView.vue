@@ -94,11 +94,19 @@ export default {
     margin-top: 20px;
   }
   .title{
-    font-size: 50px
+    font-size: 50px;
+    color: #6F4E37;
   }
   .subtitle{
     font-size: 25px;
-    color: #63ba87;
+    color: #EADDCA;
+    font-style: italic;
+  }
+  .hero.is-dark {
+    background-color: #C4A484;
+  }
+  .home .is-12 {
+    color: #6F4E37;
   }
 
 </style>

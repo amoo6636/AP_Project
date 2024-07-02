@@ -94,3 +94,67 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.page-log-in {
+    margin-top: 20px;
+}
+
+.title {
+    color: #E1C16E;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.field {
+    color: #D27D2D;
+    margin-bottom: 20px;
+}
+
+.control {
+    position: relative;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.input {
+    padding-right: 2.5rem; /* Space for icon */
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: #7a7a7a;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+.notification {
+    margin-bottom: 20px;
+    background-color: #E1C16E;
+
+}
+
+hr {
+    margin: 20px 0;
+}
+
+.has-text-centered {
+    text-align: center;
+    margin-top: 10px;
+    color: #7a7a7a;
+}
+
+.router-link {
+    color: #3273dc;
+    cursor: pointer;
+}
+
+</style>
