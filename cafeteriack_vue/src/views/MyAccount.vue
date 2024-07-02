@@ -79,7 +79,7 @@ export default {
 }
 
 .page-my-account .is-size-4 {
-  margin-top: 70px;
+  margin-top: 50px;
   color: #7B3F00;
   font-weight: bold;
   font-style: italic;
