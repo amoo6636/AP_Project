@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import Http404 , HttpResponse
 
 from rest_framework import status, authentication, permissions
@@ -12,9 +12,9 @@ from .serializers import ProductSerializer, VerticalSerializer, AddProductSerial
 
 
 
-class LatestProductsList(APIView):
+class PopularProductsList(APIView):
     def get(self, request, format=None):
-        products = Product.objects.all()[0:4]
+        products = Product.objects.annotate(sales_count=Count('items')).order_by('-sales_count')[:4]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
