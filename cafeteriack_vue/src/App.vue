@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="control">
-                  <button class="button is-success">
+                  <button class="button custom-search-button">
                       <span class="icon">
                       <i class="fas fa-search"></i>
                       </span>
@@ -41,28 +41,27 @@
           <div class="navbar-item">
             <div class="buttons">
               <template v-if="$store.state.isAuthenticated">
-                <router-link to="/my-account" class="button is-light">
+                <router-link to="/my-account" class="button custom-button">
                   <span class="icon"><i class="fas fa-user"></i></span>
                   <span>My Account</span>
                 </router-link>
               </template>
 
               <template v-else>
-                <router-link to="/log-in" class="button is-light">
+                <router-link to="/log-in" class="button custom-button">
                   <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
                   <span>Log in</span>
                 </router-link>
-
               </template>
 
               <template v-if="$store.state.isAuthenticated">
-                <button @click="logout()" class="button is-danger">
+                <button @click="logout()" class="button custom-logout-button">
                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                     <span>Log out</span>
                 </button>
               </template>
 
-              <router-link to="/cart" class="button is-success">
+              <router-link to="/cart" class="button custom-cart-button">
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                 <span>Cart ({{ cartTotalLength }})</span>
               </router-link>
@@ -178,5 +177,37 @@ export default {
   &.is-loading {
     height: 80px;
   }
+}
+
+.navbar-brand {
+  background-color: #6F4E37;
+}
+
+.navbar-menu {
+  background-color: #6F4E37;
+}
+
+.custom-search-button {
+  background-color: #808000;
+  border-color: #808000;
+  color: white;
+}
+
+.custom-logout-button {
+  background-color: #A52A2A;
+  border-color: #A52A2A;
+
+  color: white;
+}
+
+.custom-cart-button {
+  background-color: #808000;
+  border-color: #808000;
+  color: white;
+}
+.custom-button {
+  background-color: #CC7722;
+  border-color: #CC7722;
+  color: white;
 }
 </style>

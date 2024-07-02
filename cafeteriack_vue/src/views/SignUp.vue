@@ -1,49 +1,67 @@
 <template>
     <div class="page-sign-up">
-        <div class="columns">
-          <div class="column is-4 is-offset-4">
-            <h1 class="title">Sign up</h1>
+        <div class="columns is-centered">
+          <div class="column is-4">
+            <h1 class="title has-text-centered">Sign up</h1>
 
             <form @submit.prevent="submitForm">
               <div class="field">
-                <label>Name</label>
-                <div class="control">
+                <label class="label">Name</label>
+                <div class="control has-icons-left">
                   <input type="text" class="input" v-model="name">
+                  <span class="icon is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
                 </div>
               </div>
 
               <div class="field">
-                <label>Username</label>
-                <div class="control">
+                <label class="label">Username</label>
+                <div class="control has-icons-left">
                   <input type="text" class="input" v-model="username">
+                  <span class="icon is-left">
+                    <i class="fas fa-user-circle"></i>
+                  </span>
                 </div>
               </div>
 
               <div class="field">
-                <label>Email</label>
-                <div class="control">
+                <label class="label">Email</label>
+                <div class="control has-icons-left">
                   <input type="email" class="input" v-model="email">
+                  <span class="icon is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
                 </div>
               </div>
 
               <div class="field">
-                <label>Password</label>
-                <div class="control">
+                <label class="label">Password</label>
+                <div class="control has-icons-left">
                   <input type="password" class="input" v-model="password">
+                  <span class="icon is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
                 </div>
               </div>
 
               <div class="field">
-                <label>Repeat password</label>
-                <div class="control">
+                <label class="label">Repeat password</label>
+                <div class="control has-icons-left">
                   <input type="password" class="input" v-model="password2">
+                  <span class="icon is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
                 </div>
               </div>
 
               <div class="field">
-                <label>Phone Number</label>
-                <div class="control">
+                <label class="label">Phone Number</label>
+                <div class="control has-icons-left">
                   <input type="tel" class="input" v-model="phoneNumber">
+                  <span class="icon is-left">
+                    <i class="fas fa-phone"></i>
+                  </span>
                 </div>
               </div>
 
@@ -53,15 +71,17 @@
 
               <div class="field">
                 <div class="control">
-                  <button class="button is-dark">Sign up</button>
+                  <button class="button is-primary is-fullwidth custom-button">Sign up</button>
                 </div>
               </div>
 
               <hr>
 
-              Or
-              <router-link to="/log-in">click here</router-link>
-              to log in!
+              <div class="has-text-centered">
+                Or
+                <router-link to="/log-in" class="custom-link">click here</router-link>
+                to log in!
+              </div>
             </form>
           </div>
         </div>
@@ -70,7 +90,7 @@
 
 <script>
 import axios from 'axios';
-import {toast} from 'bulma-toast';
+import { toast } from 'bulma-toast';
 
 export default {
   name: 'SignUp',
@@ -127,32 +147,32 @@ export default {
         };
 
         axios
-            .post("/api/v1/users/", formData)
-            .then(response => {
-              toast({
-                message: 'Account created, please log in!',
-                type: 'is-success',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'bottom-right',
-              });
-
-              this.$router.push('/log-in');
-            })
-            .catch(error => {
-              if (error.response) {
-                for (const property in error.response.data) {
-                  this.errors.push(`${property}: ${error.response.data[property]}`);
-                }
-
-                console.log(JSON.stringify(error.response.data));
-              } else if (error.message) {
-                this.errors.push('Something went wrong. Please try again');
-
-                console.log(JSON.stringify(error));
-              }
+          .post("/api/v1/users/", formData)
+          .then(response => {
+            toast({
+              message: 'Account created, please log in!',
+              type: 'is-success',
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: 'bottom-right',
             });
+
+            this.$router.push('/log-in');
+          })
+          .catch(error => {
+            if (error.response) {
+              for (const property in error.response.data) {
+                this.errors.push(`${property}: ${error.response.data[property]}`);
+              }
+
+              console.log(JSON.stringify(error.response.data));
+            } else if (error.message) {
+              this.errors.push('Something went wrong. Please try again');
+
+              console.log(JSON.stringify(error));
+            }
+          });
       }
     },
     validatePhoneNumber(phoneNumber) {
@@ -168,3 +188,57 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.page-sign-up {
+  margin-top: 20px;
+}
+
+
+
+.label {
+  font-weight: bold;
+  color: #E1C16E;
+}
+
+.input {
+  padding-right: 2.5rem; /* Space for icon */
+}
+
+.icon {
+  color: #7a7a7a;
+}
+
+.button {
+  margin-top: 10px;
+}
+
+.notification {
+  margin-bottom: 20px;
+  background-color: #E1C16E;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+.has-text-centered {
+  text-align: center;
+  margin-top: 10px;
+  color: black;
+}
+
+.custom-link {
+  color: #D27D2D;
+  text-decoration: underline;
+}
+.custom-button {
+  color: white;
+  background-color: #D27D2D;
+}
+.title {
+  color: #D27D2D;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+</style>
