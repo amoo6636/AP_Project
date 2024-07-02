@@ -2,25 +2,25 @@
     <div class="page-my-account">
         <div class="columns is-multiline">
             <div class="column is-12">
-                <h1 class="title">My account</h1>
-            </div>
-            <div class="column is-12">
-                <button @click="logout()" class="button is-danger">Log out</button>
+                <div class="account-header">
+                    <h1 class="title">My Account</h1>
+                    <h3 class="is-size-4 mb-6">- My Orders:</h3>
+                </div>
             </div>
 
             <hr>
-            <h3 class="is-size-4 mb-6">My Orders</h3>
-            <div class="column is-12">
 
+            <div class="column is-12">
                 <OrderSummary
                     v-for="order in orders"
                     v-bind:key="order.id"
                     v-bind:order="order"
-                    />
+                />
             </div>
         </div>
     </div>
 </template>
+
 
 <script>
 import axios from 'axios'
@@ -36,17 +36,17 @@ export default {
         }
     },
     methods: {
-        logout() {
-            axios.defaults.headers.common["Authorization"] = ""
-
-            localStorage.removeItem("token")
-            localStorage.removeItem("username")
-            localStorage.removeItem("userid")
-
-            this.$store.commit('removeToken')
-
-            this.$router.push('/')
-        },
+        // logout() {
+        //     axios.defaults.headers.common["Authorization"] = ""
+        //
+        //     localStorage.removeItem("token")
+        //     localStorage.removeItem("username")
+        //     localStorage.removeItem("userid")
+        //
+        //     this.$store.commit('removeToken')
+        //
+        //     this.$router.push('/')
+        // },
         getMyOrders() {
 
             axios
@@ -60,9 +60,34 @@ export default {
         }
     },
     mounted() {
-        document.title = 'My account | Total'
+        document.title = 'My Account | Total'
 
         this.getMyOrders()
     },
 }
 </script>
+
+<style scoped>
+.page-my-account .account-header {
+    display: block;
+}
+
+.page-my-account .title,
+.page-my-account .is-size-4 {
+    margin: 0;
+    padding-left: 10px; /* Adjust as needed for consistent left alignment */
+}
+
+.page-my-account .is-size-4 {
+  margin-top: 20px;
+  color: #7B3F00;
+  font-weight: bold;
+  font-style: italic;
+  margin-left: 30px;
+}
+.page-my-account .title {
+  //background-color: #E1C16E;
+  color: #E1C16E;
+}
+
+</style>

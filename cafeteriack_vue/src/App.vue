@@ -40,17 +40,32 @@
           <div class="navbar-item">
             <div class="buttons">
               <template v-if="$store.state.isAuthenticated">
-                <router-link to="/my-account" class="button is-light">My account</router-link>
+                <router-link to="/my-account" class="button is-light">
+                  <span class="icon"><i class="fas fa-user"></i></span>
+                  <span>My Account</span>
+                </router-link>
               </template>
 
               <template v-else>
-                <router-link to="/log-in" class="button is-light">Log in</router-link>
+                <router-link to="/log-in" class="button is-light">
+                  <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                  <span>Log in</span>
+                </router-link>
+
+              </template>
+
+              <template v-if="$store.state.isAuthenticated">
+                <button @click="logout()" class="button is-danger">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span>Log out</span>
+                </button>
               </template>
 
               <router-link to="/cart" class="button is-success">
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                 <span>Cart ({{ cartTotalLength }})</span>
               </router-link>
+
             </div>
           </div>
         </div>
@@ -92,6 +107,19 @@ export default {
         axios.defaults.headers.common['Authorization'] = "Token " + token
     } else {
         axios.defaults.headers.common['Authorization'] = ""
+    }
+  },
+  methods: {
+    logout() {
+        axios.defaults.headers.common["Authorization"] = ""
+
+        localStorage.removeItem("token")
+        localStorage.removeItem("username")
+        localStorage.removeItem("userid")
+
+        this.$store.commit('removeToken')
+
+        this.$router.push('/')
     }
   },
   mounted() {
