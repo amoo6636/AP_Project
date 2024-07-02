@@ -129,7 +129,6 @@ export default {
   computed: {
       cartTotalLength() {
           let totalLength = 0
-
           for (let i = 0; i < this.cart.items.length; i++) {
               totalLength += this.cart.items[i].quantity
           }
