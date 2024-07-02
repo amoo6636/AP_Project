@@ -9,7 +9,6 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from .models import Product, Vertical
 from .serializers import ProductSerializer, VerticalSerializer, AddProductSerializer
 
-from django.contrib.admin.views.decorators import staff_member_required
 
 
 

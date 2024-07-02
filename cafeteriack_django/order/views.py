@@ -61,7 +61,7 @@ class Chartview(APIView):
 
         if not request.user.is_staff:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        print(request.user)
+        
         start_date = Order.objects.aggregate(min_date=Min('created_at'))['min_date'].date()
         end_date = Order.objects.aggregate(max_date=Max('created_at'))['max_date'].date()
         labels = list_days_between(start_date, end_date)

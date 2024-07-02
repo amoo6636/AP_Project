@@ -11,6 +11,7 @@ import Search from '../views/Search.vue'
 import AddProduct from '../views/AddProduct.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Dashbord from '../views/Dashbord.vue'
+import Storage from '../views/Storage.vue'
 
 const routes = [
   {
@@ -77,6 +78,14 @@ const routes = [
     path: '/dashbord',
     name: 'Dashbord',
     component: Dashbord,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashbord/storage',
+    name: 'Storage',
+    component: Storage,
     meta: {
       requireLogin: true
     }

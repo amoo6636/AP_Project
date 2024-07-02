@@ -5,7 +5,7 @@
                 <h1 class="title">Add Product</h1>
             </div>
 
-            <div class="column is-6">
+            <div class="column is-4.5">
                 <div class="field">
                     <label>Name</label>
 
@@ -47,7 +47,7 @@
             </div>
 
             
-            <div class="column is-6">
+            <div class="column is-4.5">
                 <div class="field">
                     <label>Sugar</label>
 
@@ -79,11 +79,20 @@
                         <input type="number" name="chocolate" class="input" v-model="chocolate">
                     </div>
                 </div>
-
-            </div>
-
             
-            <div class="column is-12">
+            </div>
+            
+            <div class="column is-3">
+                <div class="field">
+                    <router-link :to="{name: 'Dashbord' }" class="button is-light mt-4">Dashbord</router-link>
+                </div>
+
+                <div class="field">
+                <router-link :to="{name: 'Storage' }" class="button is-light mt-4">Storage</router-link>
+                </div>
+            </div>
+       
+            <div class="column is-9">
                 <div class="field">
                     <label>Description</label>
 
@@ -158,7 +167,7 @@ export default {
             axios
                 .post('/api/v1/add/', formData)
                 .then(response =>{
-                    this.$router.push('/756/dashbord')
+                    this.$router.push('/dashbord')
                 })
                 .catch(error =>{
                     console.log(JSON.stringify(error))
