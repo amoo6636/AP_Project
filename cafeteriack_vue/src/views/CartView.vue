@@ -6,7 +6,7 @@
             </div>
 
             <div class="column is-12 box">
-                <table class="table is-fullwidth" v-if="cartTotalLength">
+                <table class="table is-fullwidth is-centered" v-if="cartTotalLength">
                     <thead>
                         <tr>
                             <th>Product</th>
@@ -26,19 +26,21 @@
                     </tbody>
                 </table>
 
-                <p v-else>You're shpping Cart is empty, you're coffee is getting cold!</p>
+                <p v-else class="empty-cart-message">Your shopping cart is empty, your coffee is getting cold!</p>
             </div>
 
             <div class="column is-12 box">
                 <h2 class="subtitle">Summary</h2>
 
-                <strong>${{ cartTotalPrice.toFixed(2) }}</strong>, {{ cartTotalLength }} items
+                <strong class="total-price">${{ cartTotalPrice.toFixed(2) }}</strong>, {{ cartTotalLength }} items
                 <p></p>
-                <input v-model="checked" type="checkbox" name="check"/>
-                <label for="check">{{checked}} Serve outside</label>
+                <div class="field">
+                    <input v-model="checked" type="checkbox" name="check" id="serveOutside" />
+                    <label for="serveOutside">{{checked ? 'Yes' : 'No'}} Serve outside</label>
+                </div>
                 <hr>
                 <template v-if="cartTotalLength">
-                    <button class="button is-dark" @click="submitForm">Pay</button>
+                    <button class="button custom-button" @click="submitForm">Pay</button>
                 </template>
                 
             </div>
@@ -118,3 +120,73 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.page-cart {
+    margin-top: 20px;
+}
+.title {
+    color: #808000;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    table-layout: fixed;
+}
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+.table th {
+    background-color: #f5f5f5;
+    color: #333;
+}
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+.box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    text-align: center;
+}
+.empty-cart-message {
+    text-align: center;
+    color: #7a7a7a;
+    font-style: italic;
+}
+.subtitle {
+    color: #808000;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.total-price {
+    font-size: 1.25rem;
+    color: #808000;
+    font-weight: bold;
+}
+.field {
+    margin-top: 10px;
+    color: #808000;
+    font-weight: bold;
+}
+.custom-button {
+    background-color: #808000;
+    border-color: #808000;
+    color: white;
+    width: 10%;
+    margin-top: 20px;
+}
+</style>

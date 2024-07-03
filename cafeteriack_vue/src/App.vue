@@ -91,7 +91,7 @@
     </section>
 
     <footer class="footer">
-      <p class="has-text-centered">Copyright (c) 2024 Made</p>
+      <p class="has-text-centered">Copyright (c) 2024 </p>
     </footer>
   </div>
 </template>
@@ -261,5 +261,63 @@ export default {
 
 .custom-bar {
   background-color: #6F4E37;
+}
+</style>
+
+<style scoped>
+.page-search {
+    margin-top: 20px;
+}
+.title {
+    color: #808000;
+    margin-bottom: 10px;
+    font-size: 45px;
+}
+.is-size-5.has-text-grey {
+    margin-bottom: 30px;
+}
+.product-box {
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border-radius: 10px;
+}
+.product-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.image img {
+    max-width: 100%;
+    max-height: 200px;
+    transition: transform 0.3s;
+}
+.image img:hover {
+    transform: scale(1.05);
+}
+.is-primary {
+    background-color: #808000 !important;
+    border-color: #808000 !important;
+    color: #fff !important;
+}
+.is-primary:hover {
+    background-color: #808000 !important;
+    border-color: #808000 !important;
+}
+h3 {
+    margin-top: 10px;
+    font-weight: bold;
+}
+p {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+.mt-4 {
+    margin-top: 1rem !important;
 }
 </style>

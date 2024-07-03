@@ -3,32 +3,42 @@
 
         <div class="columns is-multiline">
             <div class="column is-12">
-                <h1 class="title">Dashbord</h1>
+                <h1 class="title">Dashboard</h1>
             </div>
 
             <div class="column is-9">
     
     
-                <div class="container">
-                    <Bar v-if="loaded" :data="chartData" />
+                <div class="box">
+                    <div class="container">
+                        <Bar v-if="loaded" :data="chartData" />
+                    </div>
                 </div>
         
-                <div class="field">
-                    <label>Vertical</label>
+                <div class="box">
+                    <div class="field">
+                        <label class="label">Vertical</label>
+                        <div class="control">
+                            <label class="radio">
+                                <input type="radio" id="one" value="hotdrinks" v-model="vertical_slug" />
+                                Hot Drinks
+                            </label>
 
-                    <div class="control">
-                        <input type="radio" id="one" value="hotdrinks" v-model="vertical_slug" />
-                        <label for="one">Hot Drinks </label>
+                            <label class="radio">
+                                <input type="radio" id="two" value="icedrinks" v-model="vertical_slug" />
+                                Ice Drinks
+                            </label>
 
-                        <input type="radio" id="two" value="icedrinks" v-model="vertical_slug"/>
-                        <label for="two">Ice Drinks </label>
+                            <label class="radio">
+                                <input type="radio" id="three" value="desserts" v-model="vertical_slug" />
+                                Desserts
+                            </label>
 
-                        <input type="radio" id="three" value="desserts" v-model="vertical_slug"/>
-                        <label for="three">Desserts </label>
-
-                        <input type="radio" id="four" value="cakes" v-model="vertical_slug"/>
-                        <label for="four">Cakes </label>
-
+                            <label class="radio">
+                                <input type="radio" id="four" value="cakes" v-model="vertical_slug" />
+                                Cakes
+                            </label>
+                        </div>
                     </div>
 
                     <div class="field">
@@ -40,15 +50,16 @@
             </div>
 
             <div class="column is-3">
-                <div class="field">
-                    <router-link :to="{name: 'AddProduct' }" class="button is-light mt-4">Add Product</router-link>
-                </div>
+                <div class="box">
+                    <div class="field">
+                        <router-link :to="{ name: 'AddProduct' }" class="button is-light is-fullwidth mt-4">Add Product</router-link>
+                    </div>
 
-                <div class="field">
-                <router-link :to="{name: 'Storage' }" class="button is-light mt-4">Storage</router-link>
+                    <div class="field">
+                        <router-link :to="{ name: 'Storage' }" class="button is-light is-fullwidth mt-4">Storage</router-link>
+                    </div>
                 </div>
-            </div>
-            
+            </div>            
         </div>        
     </div>
 
@@ -99,4 +110,46 @@ export default {
 
 </script>
 
-
+<style scoped>
+.page-dashboard {
+    margin-top: 20px;
+}
+.title {
+    color: #CC7722;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.box {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.label {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.radio {
+    margin-right: 15px;
+}
+.button.is-success {
+    background-color: #CC7722;
+    border-color: #CC7722;
+    color: #fff;
+}
+.button.is-success:hover {
+    background-color: #B05D1E;
+    border-color: #B05D1E;
+}
+.button.is-light {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+.button.is-light:hover {
+    background-color: #e6e6e6;
+    border-color: #ccc;
+}
+.button.is-fullwidth {
+    width: 100%;
+}
+</style>

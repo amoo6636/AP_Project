@@ -2,9 +2,9 @@
     <div class="page-search">
         <div class="columns is-multiline">
             <div class="column is-12">
-                <h1 class="title">Search</h1>
+                <h1 class="title has-text-centered">Search</h1>
 
-                <h2 class="is-size-5 has-text-grey">Search term: "{{ query }}"</h2>
+                <h2 class="is-size-5 has-text-grey has-text-centered">Search term: "{{ query }}"</h2>
             </div>
 
             
@@ -13,15 +13,15 @@
             v-for="product in products"
             v-bind:key="product.id"
             >
-                <div class="box">
-                <figure class="image mb-4">
-                    <img :src="product.get_thumbnail">
-                </figure>
+            <div class="box product-box">
+                    <figure class="image mb-4">
+                        <img :src="product.get_thumbnail" alt="Product Image">
+                    </figure>
 
-                <h3 class="is-size-4">{{ product.name }}</h3>
-                <p class="is-size-6 has-text-grey">${{ product.price }}</p>
+                    <h3 class="is-size-4">{{ product.name }}</h3>
+                    <p class="is-size-6 has-text-grey">${{ product.price }}</p>
 
-                <router-link v-bind:to="product.get_absolute_url" class="button is-dark mt-4">View Details</router-link>
+                    <router-link v-bind:to="product.get_absolute_url" class="button is-primary mt-4">View Details</router-link>
             </div>
         </div>
 
