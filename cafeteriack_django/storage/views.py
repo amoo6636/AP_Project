@@ -10,14 +10,18 @@ from .models import Storage
 from .serializers import StorageSerializer
 
 
-class StorageDetail(APIView):
-    def get(self, request, format=None):
-            if self.request.user.is_staff:
-                storages = Storage.objects.all()
-                serializer = StorageSerializer(storages, many=True)
-                return Response(serializer.data)
-            else:
-                return Response(status=status.HTTP_401_UNAUTHORIZED)
+#class StorageDetail(APIView):
+@api_view(['GET'])
+@authentication_classes([authentication.TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def get_storage( request, format=None):
+    print(request.user)
+    if request.user.is_staff:
+        storages = Storage.objects.all()
+        serializer = StorageSerializer(storages, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
     
         
 
