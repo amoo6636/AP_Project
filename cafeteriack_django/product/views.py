@@ -74,3 +74,17 @@ def addProduct(request):
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+class UserDetailView(APIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        user = request.user
+
+        user_data = {
+            'is_staff': user.is_staff,
+        }
+        print(user_data)
+        return Response(user_data)
+
+

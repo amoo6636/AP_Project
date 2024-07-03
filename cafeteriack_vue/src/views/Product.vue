@@ -115,7 +115,7 @@ export default {
             }
             const item = {
                 product: this.product,
-                quantity: this.quantity,
+                quantity: this.quantity
             }
             
             axios

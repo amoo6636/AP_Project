@@ -12,6 +12,8 @@ import AddProduct from '../views/AddProduct.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Dashbord from '../views/Dashbord.vue'
 import Storage from '../views/Storage.vue'
+import axiso from 'axios'
+import axios from 'axios'
 
 const routes = [
   {
@@ -72,7 +74,24 @@ const routes = [
     component: AddProduct,
     meta: {
       requireLogin: true
-    }
+    },
+    beforeEnter: async (to, from, next) => {
+      await axios
+        .get('/api/v1/isstaff')
+        .then(response =>{
+          const userData = response.data;
+          const isStaff = userData.is_staff;
+          if (isStaff){
+              next();
+          }else {
+            next('/')
+          }
+        })
+        .catch (error =>{
+          console.error('Error fetching user data:', error);
+          next('/'); 
+        })
+    },
   },
   {
     path: '/dashbord',
@@ -80,7 +99,24 @@ const routes = [
     component: Dashbord,
     meta: {
       requireLogin: true
-    }
+    },
+    beforeEnter: async (to, from, next) => {
+      await axios
+        .get('/api/v1/isstaff')
+        .then(response =>{
+          const userData = response.data;
+          const isStaff = userData.is_staff;
+          if (isStaff){
+              next();
+          }else {
+            next('/')
+          }
+        })
+        .catch (error =>{
+          console.error('Error fetching user data:', error);
+          next('/'); 
+        })
+    },
   },
   {
     path: '/dashbord/storage',
@@ -88,7 +124,24 @@ const routes = [
     component: Storage,
     meta: {
       requireLogin: true
-    }
+    },
+    beforeEnter: async (to, from, next) => {
+      await axios
+        .get('/api/v1/isstaff')
+        .then(response =>{
+          const userData = response.data;
+          const isStaff = userData.is_staff;
+          if (isStaff){
+              next();
+          }else {
+            next('/')
+          }
+        })
+        .catch (error =>{
+          console.error('Error fetching user data:', error);
+          next('/'); 
+        })
+    },
   },
 ]
 
