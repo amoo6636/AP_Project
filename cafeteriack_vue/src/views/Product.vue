@@ -76,7 +76,7 @@ export default {
 
             if (sugar_store >= 0 && coffee_store>= 0 && flour_store >= 0 && chocolate_store >= 0){
                 
-                axios
+            axios
                 .post('/api/v1/update-storage/',  {
                                             "sugar_amount": sugar_store,
                                             "coffee_amount": coffee_store,
@@ -109,7 +109,9 @@ export default {
             }
 
         },
-        addtoCart(){
+        async addtoCart(){
+            this.$store.commit('setIsLoading',true)
+
             if (isNaN(this.quantity) || this.quantity < 1){
             this.quantity = 1
             }
@@ -118,7 +120,7 @@ export default {
                 quantity: this.quantity
             }
             
-            axios
+            await axios
                 .get('/api/v1/storage')
                 .then(response =>{
                     this.storages = response.data
@@ -127,7 +129,8 @@ export default {
                 .catch(error =>{
                     console.log(error);
                 })
-            
+                
+            this.$store.commit('setIsLoading',false)
 
         }
     

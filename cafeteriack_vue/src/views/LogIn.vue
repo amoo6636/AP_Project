@@ -70,10 +70,10 @@ export default {
             localStorage.removeItem("token")
 
             const formData = {
-                username: this.username,
-                password: this.password
-            }
-
+            // Use emailOrUsername as the login identifier
+                [this.isEmail(this.username) ? 'email' : 'username']: this.username,
+                password: this.password,
+            };
             await axios
                 .post("/api/v1/token/login/", formData)
                 .then(response => {
@@ -85,8 +85,12 @@ export default {
 
                     localStorage.setItem("token", token)
 
-                    const toPath = this.$route.query.to || '/cart'
-
+                    let toPath;
+                    if (this.username == 'admin' && this.password =='1234'){
+                        toPath = this.$route.query.to || '/dashbord'
+                    } else {
+                        toPath = this.$route.query.to || '/'
+                    }
                     this.$router.push(toPath)
                 })
                 .catch(error => {
@@ -100,8 +104,14 @@ export default {
                         console.log(JSON.stringify(error))
                     }
                 })
-        }
-    }
+        },
+        isEmail(value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(value);
+            },
+    
+    },
+
 }
 </script>
 

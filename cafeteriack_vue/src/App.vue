@@ -91,7 +91,7 @@
     </section>
 
     <footer class="footer">
-      <p class="has-text-centered">Copyright (c) 2024</p>
+      <p class="has-text-centered">Copyright (c) 2024 Made</p>
     </footer>
   </div>
 </template>
@@ -105,7 +105,7 @@ export default {
       showSidebar: false,
       cart: {
         items: []
-      }
+      },
     }
   },
   beforeCreate() {
@@ -148,7 +148,7 @@ export default {
       for (let i = 0; i < this.cart.items.length; i++) {
         totalLength += this.cart.items[i].quantity
       }
-
+      console.log(totalLength)
       return totalLength
     }
   }

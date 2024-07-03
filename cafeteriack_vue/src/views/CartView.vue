@@ -70,7 +70,9 @@ export default {
         removeFromCart(item) {
             this.cart.items = this.cart.items.filter(i => i.product.id !== item.product.id)
         },
-        submitForm(){
+        async submitForm(){
+            this.$store.commit('setIsLoading', true)
+
             const items = []
             for (let i = 0; i < this.cart.items.length; i++) {
                 const item = this.cart.items[i]
@@ -85,7 +87,7 @@ export default {
             const data = {
                 'items': items,
             }
-        axios
+        await axios
             .post('/api/v1/checkout/', data)
             .then(response => {
                 this.$store.commit('clearCart')
@@ -99,7 +101,7 @@ export default {
                 console.error(error)
             })
 
- 
+            this.$store.commit('setIsLoading', false)
         }
     },
     computed: {
