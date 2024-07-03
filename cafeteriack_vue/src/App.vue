@@ -3,15 +3,11 @@
     <nav class="navbar is-dark">
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item"><strong>Cafe Teriack</strong></router-link>
-
-        <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu" @click="showMobileMenu = !showMobileMenu">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
       </div>
 
-      <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu }">
+
+
+      <div class="navbar-menu" id="navbar-menu">
         <div class="navbar-start">
           <div class="navbar-item">
             <form method="get" action="/search">
@@ -22,9 +18,9 @@
 
                 <div class="control">
                   <button class="button custom-search-button">
-                      <span class="icon">
+                    <span class="icon">
                       <i class="fas fa-search"></i>
-                      </span>
+                    </span>
                   </button>
                 </div>
               </div>
@@ -33,10 +29,10 @@
         </div>
 
         <div class="navbar-end">
-          <router-link to="/hotdrinks" class="navbar-item">HOT DRINKS</router-link>
-          <router-link to="/icedrinks" class="navbar-item">ICE DRINKS</router-link>
-          <router-link to="/desserts" class="navbar-item">DESSERTS</router-link>
-          <router-link to="/cakes" class="navbar-item">CAKES</router-link>
+<!--          <router-link to="/hotdrinks" class="navbar-item">HOT DRINKS</router-link>-->
+<!--          <router-link to="/icedrinks" class="navbar-item">ICE DRINKS</router-link>-->
+<!--          <router-link to="/desserts" class="navbar-item">DESSERTS</router-link>-->
+<!--          <router-link to="/cakes" class="navbar-item">CAKES</router-link>-->
 
           <div class="navbar-item">
             <div class="buttons">
@@ -56,8 +52,8 @@
 
               <template v-if="$store.state.isAuthenticated">
                 <button @click="logout()" class="button custom-logout-button">
-                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-                    <span>Log out</span>
+                  <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                  <span>Log out</span>
                 </button>
               </template>
 
@@ -65,19 +61,33 @@
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                 <span>Cart ({{ cartTotalLength }})</span>
               </router-link>
-
             </div>
           </div>
         </div>
       </div>
+
+      <div class="navbar-end custom-bar">
+        <a class="navbar-item" @click="toggleSidebar">
+          <span class="icon">
+            <i class="fas fa-bars"></i>
+          </span>
+        </a>
+      </div>
     </nav>
+
+    <div :class="{'is-active': showSidebar}" class="sidebar">
+      <router-link to="/hotdrinks" class="sidebar-item">Hot Drinks</router-link>
+      <router-link to="/icedrinks" class="sidebar-item">Ice Drinks</router-link>
+      <router-link to="/desserts" class="sidebar-item">Desserts</router-link>
+      <router-link to="/cakes" class="sidebar-item">Cakes</router-link>
+    </div>
 
     <div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading }">
       <div class="lds-dual-ring"></div>
     </div>
 
     <section class="section">
-      <router-view/>
+      <router-view />
     </section>
 
     <footer class="footer">
@@ -92,7 +102,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      showMobileMenu: false,
+      showSidebar: false,
       cart: {
         items: []
       }
@@ -110,6 +120,13 @@ export default {
     }
   },
   methods: {
+    toggleSidebar() {
+      this.showSidebar = !this.showSidebar;
+    },
+    navigateTo(vertical) {
+      this.$router.push({ name: 'products', params: { vertical } });
+      this.showSidebar = false;
+    },
     logout() {
         axios.defaults.headers.common["Authorization"] = ""
 
@@ -126,17 +143,18 @@ export default {
     this.cart = this.$store.state.cart
   },
   computed: {
-      cartTotalLength() {
-          let totalLength = 0
-          for (let i = 0; i < this.cart.items.length; i++) {
-              totalLength += this.cart.items[i].quantity
-          }
-
-          return totalLength
+    cartTotalLength() {
+      let totalLength = 0
+      for (let i = 0; i < this.cart.items.length; i++) {
+        totalLength += this.cart.items[i].quantity
       }
+
+      return totalLength
+    }
   }
 }
 </script>
+
 
 <style lang="scss">
 @import '../node_modules/bulma';
@@ -209,5 +227,39 @@ export default {
   background-color: #CC7722;
   border-color: #CC7722;
   color: white;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: -250px;
+  width: 165px;
+  height: 35%;
+  background-color: #6F4E37;
+  color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar.is-active {
+  right: 0;
+}
+
+.sidebar-item {
+  padding: 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar-item:hover {
+  background-color: #808000;
+}
+
+.custom-bar {
+  background-color: #6F4E37;
 }
 </style>

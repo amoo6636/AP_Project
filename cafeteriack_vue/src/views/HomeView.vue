@@ -84,29 +84,54 @@ export default {
 }
 </script>
 
+
 <style scoped>
 .image {
-    margin-top: -1.25rem;
-    margin-left: -1.25rem;
-    margin-right: -1.25rem;
-  }
-  .box {
-    margin-top: 20px;
-  }
-  .title{
-    font-size: 50px;
-    color: #6F4E37;
-  }
-  .subtitle{
-    font-size: 25px;
-    color: #EADDCA;
-    font-style: italic;
-  }
-  .hero.is-dark {
-    background-color: #C4A484;
-  }
-  .home .is-12 {
-    color: #6F4E37;
-  }
+  margin-top: -1.25rem;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+}
 
+.title {
+  font-size: 4rem;
+  color: #CC7722;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for emphasis */
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #EADDCA;
+  font-style: italic;
+}
+
+.hero.is-dark {
+  background-color: #C4A484;
+  background-image: linear-gradient(rgb(111, 78, 55, 0.2), rgba(196, 164, 132, 0.95)), url(@/assets/images/hero-background.jpg);
+  background-size: cover;
+  background-position: center;
+  position: marker;
+}
+
+.hero-foot {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+.hero-coffee {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  margin-bottom: -30px; /* Adjust to position coffee image */
+}
+
+.has-text-primary {
+  color: #CC7722;
+}
 </style>
