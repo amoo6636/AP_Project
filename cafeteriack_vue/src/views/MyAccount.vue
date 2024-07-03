@@ -3,7 +3,7 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <div class="account-header">
-                    <h1 class="title">My Account</h1>
+                    <h1 class="title has-text-centered">My Account</h1>
                     <h3 class="is-size-4 mb-6">- My Orders:</h3>
                 </div>
             </div>
@@ -75,18 +75,19 @@ export default {
 .page-my-account .title,
 .page-my-account .is-size-4 {
     margin: 0;
-    padding-left: 10px; /* Adjust as needed for consistent left alignment */
+    padding-left: 10px;
 }
 
 .page-my-account .is-size-4 {
-  margin-top: 20px;
+  margin-top: 50px;
   color: #7B3F00;
   font-weight: bold;
   font-style: italic;
   margin-left: 30px;
 }
 .page-my-account .title {
-  //background-color: #E1C16E;
+  margin-top: 20px;
+  font-size: 2.5rem;
   color: #E1C16E;
 }
 
