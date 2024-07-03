@@ -4,66 +4,59 @@
 
             <div class="column is-12">
                 <h1 class="title">Storage</h1>
-            
-                <h1> Our storage have:</h1>
-            </div>  
+                <h2 class="subtitle">Our storage have:</h2>
+            </div>
 
-                <div class="column is-9">
-                <div
-                    v-for="storage in storages"
-                    v-bind:key="storage.id"
-                    >
-                    <p class="is-size-6 has-text-grey">{{ storage.name }} : {{ storage.amount }}</p>
+            <div class="column is-9">
+                <div class="box">
+                    <div v-for="storage in storages" v-bind:key="storage.id" class="content">
+                        <p class="is-size-6 has-text-grey">{{ storage.name }} : {{ storage.amount }}</p>
+                    </div>
 
-                </div>
+                    <div class="field">
+                        <label class="label">Sugar</label>
+                        <div class="control">
+                            <input type="number" name="sugar" class="input" v-model="sugar">
+                        </div>
+                    </div>
 
-                <div class="field">
-                    <label>Sugar</label>
+                    <div class="field">
+                        <label class="label">Coffee</label>
+                        <div class="control">
+                            <input type="number" name="coffee" class="input" v-model="coffee">
+                        </div>
+                    </div>
 
-                    <div class="control">
-                        <input type="number" name="sugar" class="input" v-model="sugar">
+                    <div class="field">
+                        <label class="label">Flour</label>
+                        <div class="control">
+                            <input type="number" name="flour" class="input" v-model="flour">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Chocolate</label>
+                        <div class="control">
+                            <input type="number" name="chocolate" class="input" v-model="chocolate">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success" @click="UpdateStorage">Update Storage</button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="field">
-                    <label>Coffee</label>
-
-                    <div class="control">
-                        <input type="number" name="coffee" class="input" v-model="coffee">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label>Flour</label>
-
-                    <div class="control">
-                        <input type="number" name="flour" class="input" v-model="flour">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label>Chocolate</label>
-
-                    <div class="control">
-                        <input type="number" name="chocolate" class="input" v-model="chocolate">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="control">
-                        <button class="button is-success" @click="UpdateStorage">َUpdate Storage</button>
-                    </div>
-                </div>
-
             </div>
 
             <div class="column is-3">
-                <div class="field">
-                    <router-link :to="{name: 'Dashbord' }" class="button is-light mt-4">Dashbord</router-link>
-                </div>
-
-                <div class="field">
-                <router-link :to="{name: 'AddProduct' }" class="button is-light mt-4">Add Product</router-link>
+                <div class="box">
+                    <div class="field">
+                        <router-link :to="{ name: 'Dashbord' }" class="button is-light is-fullwidth mt-4">Dashboard</router-link>
+                    </div>
+                    <div class="field">
+                        <router-link :to="{ name: 'AddProduct' }" class="button is-light is-fullwidth mt-4">Add Product</router-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,56 +68,108 @@ import axios from 'axios';
 
 export default {
     name: 'Storage',
-    data(){
+    data() {
         return {
             storages: {},
             sugar: '',
-            coffee:  '',
-            flour:  '',
+            coffee: '',
+            flour: '',
             chocolate: ''
         }
     },
-    mounted(){
+    mounted() {
         document.title = 'Storage | Cafe Teriack'
         this.getStorage()
     },
     methods: {
-        async UpdateStorage(){
+        async UpdateStorage() {
             this.$store.commit('setIsLoading', true)
 
             const sugar_amount = this.sugar
             const coffee_amount = this.coffee
             const flour_amount = this.flour
             const chocolate_amount = this.chocolate
-            
+
             this.$store.commit('setStorage', sugar_amount, coffee_amount, flour_amount, chocolate_amount)
             axios
-                .post('/api/v1/update-storage/',  {
-                                            "sugar_amount": sugar_amount,
-                                            "coffee_amount": coffee_amount,
-                                            "flour_amount": flour_amount,
-                                            "chocolate_amount": chocolate_amount
-                                            })
-                .catch(error =>{
+                .post('/api/v1/update-storage/', {
+                    "sugar_amount": sugar_amount,
+                    "coffee_amount": coffee_amount,
+                    "flour_amount": flour_amount,
+                    "chocolate_amount": chocolate_amount
+                })
+                .catch(error => {
                     console.log(error);
                 })
-            this.$router.push('/dashbord')
+            this.$router.push('/dashboard')
 
             this.$store.commit('setIsLoading', false)
         },
         getStorage() {
             axios
                 .get('/api/v1/storage')
-                .then(response =>{
+                .then(response => {
                     this.storages = response.data
                 })
-                .catch(error =>{
+                .catch(error => {
                     console.log(error);
-                })        
-
+                })
         }
     }
-
 }
 </script>
 
+<style scoped>
+.page-storage {
+    margin-top: 20px;
+}
+
+.title, .subtitle {
+    color: #CC7722;
+    text-align: left;
+    //margin-bottom: 20px;
+}
+.subtitle {
+  font-style: italic;
+  margin-top: 40px;
+  margin-bottom: 0px;
+  color: #E1C16E;
+}
+
+.box {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+    color: #6F4E37;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.button.is-success {
+    background-color: #CC7722;
+    border-color: #CC7722;
+    color: #fff;
+}
+
+.button.is-success:hover {
+    background-color: #B05D1E;
+    border-color: #B05D1E;
+}
+
+.button.is-light {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.button.is-light:hover {
+    background-color: #e6e6e6;
+    border-color: #ccc;
+}
+
+.button.is-fullwidth {
+    width: 100%;
+}
+</style>
